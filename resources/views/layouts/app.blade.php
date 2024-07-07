@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +14,7 @@
                 <div class="flex space-x-7">
                     <div>
                         <a href="{{ route('home') }}" class="flex items-center py-4 px-2">
-                            <span class="font-semibold text-gray-500 text-lg">Blog with Videos</span>
+                            <span class="font-semibold text-gray-500 text-lg">GPOAT</span>
                         </a>
                     </div>
                     @auth

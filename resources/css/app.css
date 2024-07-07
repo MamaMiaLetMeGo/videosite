@@ -1,3 +1,15 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+/* Custom styles */
+@layer components {
+    .custom-input {
+        @apply border border-gray-300 rounded-md shadow-sm px-3 py-2;
+    }
+
+    .custom-input:focus {
+        @apply border-indigo-300 ring ring-indigo-200 ring-opacity-50;
+        caret-color: black;
+    }
+}

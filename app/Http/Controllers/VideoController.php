@@ -12,8 +12,8 @@ class VideoController extends Controller
 
     public function index()
     {
-        $videos = Video::latest()->paginate(10);
-        return view('videos.index', compact('videos'));
+        $videos = Video::latest()->take(6)->get(); // Adjust the number as needed
+        return view('home', compact('videos'));
     }
 
     public function create()
@@ -42,15 +42,17 @@ class VideoController extends Controller
 
     public function show(Video $video)
     {
-        if (Storage::disk('public')->exists($video->video_path)) {
-            $path = Storage::disk('public')->path($video->video_path);
-            $content = file_get_contents($path);
-            $type = Storage::disk('public')->mimeType($video->video_path);
+        $canViewFullVideo = auth()->check();
+        
+        // Determine which video path to use
+        $videoPath = $canViewFullVideo ? $video->video_path : $video->preview_path;
+        
+        return view('videos.show', compact('video', 'canViewFullVideo', 'videoPath'));
+    }
 
-            return response($content)->header('Content-Type', $type);
-        }
-
-        abort(404);
+    public function serveVideo($path)
+    {
+        return response()->file(storage_path('app/public/' . $path));
     }
 
     // Add other methods as needed (edit, update, destroy)

@@ -11,7 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'can.view.full.video' => \App\Http\Middleware\EnsureUserCanViewFullVideo::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

@@ -25,12 +25,17 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
+            'video' => 'nullable|mimetypes:video/mp4|max:20000', // 20MB Max, optional
         ]);
-
-        Post::create($request->all());
+        if ($request->hasFile('video')) {
+            $path = $request->file('video')->store('videos', 'public');
+            $validatedData['video_path'] = $path;
+        }
+    
+        Post::create($validatedData);
 
         return redirect()->route('posts.index')->with('success', 'Post created successfully.');
     }
