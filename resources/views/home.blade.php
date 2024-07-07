@@ -32,19 +32,20 @@
                 </div>
             </div>
 
-            <!-- Video Previews -->
+            <!-- Latest Posts with Thumbnails -->
             <h2 class="text-2xl font-bold mb-4">Latest Videos</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                @foreach($videos as $video)
+                @foreach($latestPosts as $post)
                     <div class="bg-white shadow-md rounded-lg overflow-hidden">
-                        <video class="w-full h-48 object-cover" poster="{{ asset('storage/' . $video->thumbnail) }}" preload="metadata">
-                            <source src="{{ asset('storage/' . $video->preview_path) }}" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
+                        @if($post->thumbnail_path)
+                            <img src="{{ asset('storage/' . $post->thumbnail_path) }}" alt="{{ $post->title }}" class="w-full h-48 object-cover">
+                        @else
+                            <div class="w-full h-48 bg-gray-200 flex items-center justify-center">No Thumbnail</div>
+                        @endif
                         <div class="p-4">
-                            <h3 class="font-bold text-xl mb-2">{{ $video->title }}</h3>
-                            <p class="text-gray-700 text-base mb-4">{{ Str::limit($video->description, 100) }}</p>
-                            <a href="{{ route('videos.show', $video) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Watch Now</a>
+                            <h3 class="font-bold text-xl mb-2">{{ $post->title }}</h3>
+                            <p class="text-gray-700 text-base mb-4">{{ Str::limit($post->content, 100) }}</p>
+                            <a href="{{ route('posts.show', $post) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Watch Now</a>
                         </div>
                     </div>
                 @endforeach

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -25,19 +26,31 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
-            'video' => 'nullable|mimetypes:video/mp4|max:20000', // 20MB Max, optional
-        ]);
-        if ($request->hasFile('video')) {
-            $path = $request->file('video')->store('videos', 'public');
-            $validatedData['video_path'] = $path;
-        }
-    
-        Post::create($validatedData);
+        try {
+            $validatedData = $request->validate([
+                'title' => 'required|max:255',
+                'content' => 'required',
+                'video' => 'nullable|file|mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime|max:102400', // 100MB Max
+                'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
 
-        return redirect()->route('posts.index')->with('success', 'Post created successfully.');
+            if ($request->hasFile('video')) {
+                $path = $request->file('video')->store('videos', 'public');
+                $validatedData['video_path'] = $path;
+            }
+
+            if ($request->hasFile('thumbnail')) {
+                $thumbnailPath = $request->file('thumbnail')->store('thumbnails', 'public');
+                $validatedData['thumbnail_path'] = $thumbnailPath;
+            }
+
+            $post = Post::create($validatedData);
+
+            return redirect()->route('posts.show', $post)->with('success', 'Post created successfully.');
+        } catch (\Exception $e) {
+            Log::error('Post creation failed: ' . $e->getMessage());
+            return back()->withInput()->withErrors(['error' => 'Failed to create post. ' . $e->getMessage()]);
+        }
     }
 
     public function show(Post $post)

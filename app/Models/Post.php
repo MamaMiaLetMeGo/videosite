@@ -12,6 +12,7 @@ class Post extends Model
     protected $fillable = [
         'title',
         'content',
-        'video_path'
+        'video_path',
+        'thumbnail_path'
     ];
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Video;
+use App\Models\Post;
 
 
 class HomeController extends Controller
@@ -25,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $videos = Video::latest()->take(6)->get(); // Adjust the number as needed
-        return view('home', compact('videos'));
+        $latestPosts = Post::latest()->take(6)->get();
+        return view('home', compact('latestPosts'));
     }
 }
