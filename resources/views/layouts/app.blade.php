@@ -7,7 +7,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-100">
+<body class="overflow-x-hidden flex-col min-h-screen bg-gray-100">
     <nav class="bg-white shadow-lg mb-4">
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex justify-between">
@@ -42,5 +42,6 @@
     <div class="max-w-6xl mx-auto px-4">
         @yield('content')
     </div>
+    @yield('footer')
 </body>
 </html>

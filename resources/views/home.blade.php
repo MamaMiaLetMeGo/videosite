@@ -66,3 +66,52 @@
     </div>
 </div>
 @endsection
+@section('footer')
+<!-- Footer -->
+<footer class="bg-gray-800 text-white mt-12 w-full">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Row 1 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">GPOAT MEDIA, LLC</h3>
+                <p>All performers appearing in this web site are adults age 18 years or older.</p>
+                <p>18 U.S.C. 2257 Record-Keeping Requirements Compliance Statement</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-gray-300">Home</a></li>
+                    <li><a href="#" class="hover:text-gray-300">Videos</a></li>
+                    <li><a href="#" class="hover:text-gray-300">Login</a></li>
+                    <li><a href="#" class="hover:text-gray-300">Terms and Conditions</a></li>
+                    <li><a href="#" class="hover:text-gray-300">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-gray-300">Customer Support</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Follow</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-gray-300">Twitter</a>
+                    <a href="#" class="hover:text-gray-300">Instagram</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Row 2 -->
+        <div class="border-t border-gray-700 pt-8 mb-8">
+            <h3 class="text-lg font-semibold mb-4">Subscribe to My Newsletter</h3>
+            <form class="flex flex-col md:flex-row">
+                <input type="email" placeholder="Enter your email" class="bg-gray-700 text-white px-4 py-2 mb-2 md:mb-0 md:mr-2 rounded">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded">Subscribe</button>
+            </form>
+        </div>
+        
+        <!-- Row 3 -->
+        <div class="text-center">
+            <p>&copy; 2024 GPOAT. All rights reserved.</p>
+            <p>All models have two forms of ID (Passport, Drivers license). Picture holding up form of ID(s) beside face.
+            Pre-shoot video consent. Post-shoot video consent. In-video consent or known as BTS (behind he scenes showing affirmative consent and purpose).</p>
+        </div>
+    </div>
+</footer>
+@endsection
